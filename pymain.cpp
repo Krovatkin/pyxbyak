@@ -20,7 +20,8 @@ PYBIND11_MODULE(pyxbyak, m) {
         .export_values();
 
     pybind11::class_<Xbyak::Operand>(m, "Operand");
-    pybind11::class_<Xbyak::Reg64, Xbyak::Operand>(m, "Reg64");
+    pybind11::class_<Xbyak::Reg32e, Xbyak::Operand>(m, "Reg32e");
+    pybind11::class_<Xbyak::Reg64, Xbyak::Reg32e>(m, "Reg64");
 
     pybind11::class_<Xbyak::CodeGenerator>(m, "CodeGenerator")
         .def(pybind11::init<>())
