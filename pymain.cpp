@@ -23,10 +23,14 @@ PYBIND11_MODULE(pyxbyak, m) {
     pybind11::class_<Xbyak::Reg32e, Xbyak::Operand>(m, "Reg32e");
     pybind11::class_<Xbyak::Reg64, Xbyak::Reg32e>(m, "Reg64");
 
+
+    pybind11::class_<Xbyak::AddressFrame>(m, "AddressFrame");
+    
     pybind11::class_<Xbyak::CodeGenerator>(m, "CodeGenerator")
         .def(pybind11::init<>())
         .def("ret", &Xbyak::CodeGenerator::ret)
         .def_readonly("rax", &Xbyak::CodeGenerator::rax)
+        .def_readonly("ptr", &Xbyak::CodeGenerator::ptr)
         // .def("rax2", [](Xbyak::CodeGenerator& cg) -> const Xbyak::Operand {
         //     return cg.rax;
         // })
