@@ -22,9 +22,13 @@ PYBIND11_MODULE(pyxbyak, m) {
     pybind11::class_<Xbyak::Operand>(m, "Operand");
     pybind11::class_<Xbyak::Reg32e, Xbyak::Operand>(m, "Reg32e");
     pybind11::class_<Xbyak::Reg64, Xbyak::Reg32e>(m, "Reg64");
+    pybind11::class_<Xbyak::Address, Xbyak::Operand>(m, "Address");
 
 
-    pybind11::class_<Xbyak::AddressFrame>(m, "AddressFrame");
+    pybind11::class_<Xbyak::AddressFrame>(m, "AddressFrame")
+        .def("__getitem__", [](Xbyak::AddressFrame& af, uint64_t disp) {
+            return af[disp];
+        });
     
     pybind11::class_<Xbyak::CodeGenerator>(m, "CodeGenerator")
         .def(pybind11::init<>())
